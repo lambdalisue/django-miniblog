@@ -64,15 +64,15 @@ class EntryModelTestCase(TestCase):
 
         entry.title = ''
         self.assertRaises(ValidationError, entry.full_clean)
-
-        entry.body = ''
-        self.assertRaises(ValidationError, entry.full_clean)
+        entry.title = 'foo'
 
         entry.title = '*' * 100
         self.assertRaises(ValidationError, entry.full_clean)
+        entry.title = 'foo'
 
-        entry.title = '!#$%&()'
+        entry.body = ''
         self.assertRaises(ValidationError, entry.full_clean)
+        entry.body = 'bar'
 
     def test_deletion(self):
         """blog.Entry: deletion works correctly"""
